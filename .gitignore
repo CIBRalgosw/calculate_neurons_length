@@ -1,0 +1,5 @@
+
+*.json
+some_tests.py
+NOTE.md
+.idea/
