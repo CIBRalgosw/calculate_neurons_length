@@ -28,7 +28,7 @@ Allen annotation文件获取地址：
 
 下载的annotation文件里面的数字代表其space值，比如annotation_10.nrrd，代表space为10 um。
 
-### 运行方式 
+### 运行方式
 打开python文件，修改参数，开始运行。
 ```commandline
 python main.py
