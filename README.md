@@ -1,6 +1,6 @@
 ### 说明
 
-本脚本主要用来计算一个神经元（swc文件）在不同脑区轴突/树突的总长度。
+本脚本主要用来计算神经元（swc文件）在不同脑区轴突/树突的总长度，支持单个文件处理以及批处理。同时支持对neuron进行smooth处理。
 
 ### 环境
 
@@ -8,19 +8,35 @@
 ```commandline
 pip install allensdk pynrrd
 ```
+如果需要smooth功能，需要有R环境（建议的R版本4.3.2），以及对应的nat库，安装命令为：
+```R
+install.packages("nat")
+```
+建议使用集群zqj00at00swzlab账户，上述环境都已安装好，使用下面命令激活环境即可：
+```commandline
+# 加载python环境
+source activate py38
+# 加载R环境
+module load R/4.3.2
+```
 
 ### 参数说明
 ```python
-# swc文件路径
-swc_filepath = r"D:\_Data\sunwenzhi_lab\wuwei\19.swc"
+### parames
+# 批处理时swc_path设置为swc文件所在文件夹路径；单个处理时swc_path设为swc文件路径
+swc_path = r"D:\_Data\Sun_WenZhi\wuwei\test"
 # swc文件里面的坐标的单位，多少um
 swc_coord_unit = 10
 # allen注释文件路径
 annotation_filepath = r"D:\_Data\CCF\mouse_ccf\annotation\ccf_2017\annotation_10.nrrd"
 # allen注释文件space，即一个像素的真实物理尺寸（单位，um），因为allen提供的这几个注释文件xyz都是均匀的，所以这里使用一个值来表示
 annotation_space = 10
-# 输出json文件的路径
-output_path = r"D:\_Data\sunwenzhi_lab\wuwei\19_out.json"
+# 执行smooth的R脚本路径
+r_script_path = 'smooth.R'
+# smooth开关, True or False
+smooth = True
+# 平滑参数 The standard deviation of the Gaussian smoothing kernel
+sigma = 2
 ```
 
 Allen annotation文件获取地址：
@@ -34,6 +50,13 @@ Allen annotation文件获取地址：
 python main.py
 ```
 
+### 输出
+结果会在swc文件所在路径下保存，如下：
+```
+19.swc          # 输入文件
+19_smooth.swc   # smooth后的文件
+19_smooth.json  # 针对smooth的结果计算的长度结果
+```
 
 ### 结果说明
 结果以json文件形式保存，里面保存了该神经元所在的所有脑区（并不是总共所有的脑区）的对应结果信息，比如其中一个脑区的结果如下：
