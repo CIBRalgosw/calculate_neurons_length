@@ -19,6 +19,10 @@ source activate py38
 # 加载R环境
 module load R/4.3.2
 ```
+集群上代码路径：
+```
+/GPFS/sunwenzhi_lab_permanent/zqj00at00swzlab/calculate_neurons_length
+```
 
 ### 参数说明
 ```python
