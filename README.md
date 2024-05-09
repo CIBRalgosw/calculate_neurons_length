@@ -15,6 +15,7 @@ install.packages("nat")
 建议使用集群zqj00at00swzlab账户，上述环境都已安装好，使用下面命令激活环境即可：
 ```commandline
 # 加载python环境
+module load anaconda3
 source activate py38
 # 加载R环境
 module load R/4.3.2
@@ -49,9 +50,13 @@ Allen annotation文件获取地址：
 下载的annotation文件里面的数字代表其space值，比如annotation_10.nrrd，代表space为10 um。
 
 ### 运行方式
-打开python文件，修改参数，开始运行。
+打开python文件，修改参数，开始运行：
 ```commandline
 python main.py
+```
+如果在集群要以提交作业的形式运行，命令示例：
+```commandline
+srun -c 12 --mem 50G -J calculate_neurons_length python main.py
 ```
 
 ### 输出
